@@ -1,14 +1,17 @@
-import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
+import { authors, BOOKS_PER_PAGE } from "./data.js";
 
 /**
+ * Creates and appends book preview buttons to a given container element.
+ * Each preview includes a book's cover image, title and author
  *
- * @param {Array} books - This is the list of books being/to be displayed.
- * @param {HTMLElement} container - This is where all the previews should be added to
+ * @param {Array} books - This is the list of books being/to be displayed. Each object should contain 'author', 'id', 'image' and 'title' properties.
+ * @param {HTMLElement} container - This is the container where all the previews are appended to
  */
 export function createBookPreviews(books, container) {
   const starting = document.createDocumentFragment();
 
   for (const { author, id, image, title } of books.slice(0, BOOKS_PER_PAGE)) {
+    // Create a new button element to wrap the book preview
     const element = document.createElement("button");
     element.classList = "preview";
     element.setAttribute("data-preview", id);
@@ -31,9 +34,12 @@ export function createBookPreviews(books, container) {
 }
 
 /**
- * @param {Object} list -
- * @param {HTMLElement} dropdownList -
- * @param {string} defaultOptionText -
+ * This function populates a dropdown menu with options to filter for any genre/author
+ *
+ *
+ * @param {Object} list - An object where keys represent option values and values represent option labels.
+ * @param {HTMLElement} dropdownList - The dropdown menu where all the options will be appended
+ * @param {string} defaultOptionText - This is the text for the default option ("All")
  */
 
 export function populateDropdown(list, dropdown, defaultOptionText) {
@@ -56,6 +62,12 @@ export function populateDropdown(list, dropdown, defaultOptionText) {
   // Append the options to the dropdown
   dropdown.appendChild(fragment);
 }
+
+/**
+ * This function is used to set the theme of the application using and updating css variables
+ *
+ * @param {string} theme - Two options of "night" being dark mode and "day" being light mode
+ */
 
 export function setTheme(theme) {
   const darkColor = theme === "night" ? "255, 255, 255" : "10, 10, 20";
